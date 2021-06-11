@@ -5,7 +5,7 @@ use question::{Answer, Question};
 fn print_code_snippet(arg: &Option<String>, qq: &Quiz) -> Result<(), String> {
     if let Some(ll) = arg {
         match qq.code_snippet(ll) {
-            Some(cs) => println!("code snippet:\n{}", cs),
+            Some(cs) => println!("Code Snippet:\n{}", cs),
             None => return Err(format!("Cannot found {} code snippet", ll)),
         }
     }
@@ -23,7 +23,7 @@ fn main() -> Result<(), String> {
                     println!("{}", qq.use_fmt_temp(commandline_args.template())?);
 
                     // ask
-                    let a = Question::new("Is this good?")
+                    let a = Question::new("Is this good? (yes/no/y/n)")
                         .yes_no()
                         .until_acceptable()
                         .ask()

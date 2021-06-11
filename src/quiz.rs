@@ -136,7 +136,7 @@ impl fmt::Display for Quiz {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(
             f,
-            "{}: {}\n\n{}",
+            "{}: {}\n\n{}\n",
             self.quiz_id().unwrap(),
             self.title,
             self.quiz_description().unwrap(),
