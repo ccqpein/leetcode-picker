@@ -4,7 +4,7 @@ use std::str::FromStr;
 
 /// command line arguments
 #[derive(Default, Clap, Debug)]
-#[clap(version = "0.1")]
+#[clap(version = "0.1.0")]
 pub struct Args {
     /// quiz name
     #[clap(long = "name")]
