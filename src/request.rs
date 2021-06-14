@@ -144,7 +144,7 @@ fn get_csrftoken(path: impl AsRef<Path>) -> Result<String, String> {
             if t.is_some() {
                 return Ok(t.as_ref().unwrap().to_string());
             } else {
-                let mut f = File::open(path).map_err(|e| e.to_string())?;
+                let mut f = File::open(path).map_err(|e| e.to_string() + ". Read token error")?;
                 let mut buffer = Vec::new();
                 f.read_to_end(&mut buffer).map_err(|e| e.to_string())?;
 

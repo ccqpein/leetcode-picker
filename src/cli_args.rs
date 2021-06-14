@@ -4,7 +4,7 @@ use std::str::FromStr;
 
 /// command line arguments
 #[derive(Default, Clap, Debug)]
-#[clap(version = "0.1.0")]
+#[clap(version = "0.1.1")]
 pub struct Args {
     /// quiz name
     #[clap(long = "name")]
@@ -33,9 +33,6 @@ pub struct Args {
     /// template string
     #[clap(long = "temp-str")]
     temp_str: Option<String>,
-    // /// template file
-    // #[clap(short, long = "temp-file")]
-    // temp_file: Option<String>,
 }
 
 impl Args {
