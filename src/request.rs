@@ -168,6 +168,16 @@ fn get_csrftoken(path: impl AsRef<Path>) -> Result<String, String> {
     }
 }
 
+/// set token with input token
+pub fn set_token(token_str: &Option<String>) {
+    if token_str.is_some() {
+        match CSRFTOKEN.try_lock() {
+            Ok(ref mut t) => **t = token_str.clone(),
+            Err(e) => panic!(e.to_string()),
+        }
+    }
+}
+
 fn make_client(cookie: &str, url: impl IntoUrl) -> reqwest::Result<Client> {
     let jar = Jar::default();
     jar.add_cookie_str(&(String::from("csrftoken=") + cookie), &url.into_url()?);
@@ -223,5 +233,14 @@ mod tests {
     #[test]
     fn test_make_json_body() {
         dbg!(LC_GRAPHQL_BODY[0].to_string() + "aaa" + LC_GRAPHQL_BODY[1]);
+    }
+
+    #[test]
+    fn test_set_token() {
+        set_token(&Some("aaa".to_string()));
+        match CSRFTOKEN.try_lock() {
+            Ok(ref mut t) => assert_eq!(**t, Some("aaa".to_string())),
+            Err(e) => panic!(e.to_string()),
+        }
     }
 }

@@ -4,13 +4,17 @@ This is a tiny app for picking the quiz from [leetcode](https://leetcode.com), p
 
 ## Usage ##
 
-Firstly, login leetcode and find out the cookie `csrftoken`, it looks like `c6J80TGFMuNrdy4O9cuedV9fSSDw112xRUmTqkcgUs9sYbxxxxxxxxxxxx`. Then: 
+Firstly, login leetcode and find out the cookie `csrftoken` in cache, it looks like `c6J80TGFMuNrdy4O9cuedV9fSSDw112xRUmTqkcgUs9sYbxxxxxxxxxxxx`. Then: 
+
+`leetcode-picker --id 1 -c rust --token c6J80TGFMuNrdy4O9cuedV9fSSDw112xRUmTqkcgUs9sYbxxxxxxxxxxxx`.
+
+Or you can put token inside separate file `./vault/csrftoken`
 
 ```shell
 echo 'c6J80TGFMuNrdy4O9cuedV9fSSDw112xRUmTqkcgUs9sYbxxxxxxxxxxxx' > ./vault/csrftoken
 ```
 
-then the `./vault/csrftoken` file is your token file.
+then the `./vault/csrftoken` file is your token file, and run like `leetcode-picker --id 1 -c rust` will do the same thing as command before.
 
 Unless you give `--id` or `--name`, you always need `-r` for randomly pick.
 
@@ -56,4 +60,5 @@ all template fields:
 ### TODO ###
 
   * [ ] how to login and get token in this app?
-    * [ ] where to store token string?
+    * [x] where to store token string?
+  * [ ] emacs mode?

@@ -15,6 +15,9 @@ fn print_code_snippet(arg: &Option<String>, qq: &Quiz) -> Result<(), String> {
 fn main() -> Result<(), String> {
     let commandline_args = cli_args::Args::parse();
     //dbg!(&commandline_args);
+
+    // set token with command line token
+    set_token(commandline_args.token());
     match commandline_args.if_random() {
         true => {
             let qq = if commandline_args.if_interact() {

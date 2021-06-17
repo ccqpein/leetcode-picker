@@ -4,7 +4,7 @@ use std::str::FromStr;
 
 /// command line arguments
 #[derive(Default, Clap, Debug)]
-#[clap(version = "0.1.1")]
+#[clap(version = "0.1.2")]
 pub struct Args {
     /// quiz name
     #[clap(long = "name")]
@@ -33,6 +33,10 @@ pub struct Args {
     /// template string
     #[clap(long = "temp-str")]
     temp_str: Option<String>,
+
+    /// token string
+    #[clap(long = "token")]
+    token: Option<String>,
 }
 
 impl Args {
@@ -71,6 +75,10 @@ impl Args {
 
     pub fn template(&self) -> &Option<String> {
         &self.temp_str
+    }
+
+    pub fn token(&self) -> &Option<String> {
+        &self.token
     }
 }
 

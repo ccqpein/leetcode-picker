@@ -5,4 +5,4 @@ mod regex_handle;
 mod request;
 
 pub use quiz::*;
-//pub use request::*;
+pub use request::set_token;
