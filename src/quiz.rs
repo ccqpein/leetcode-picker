@@ -32,6 +32,8 @@ struct FmtTemplate {
     source: String,
     title: String,
     content: String,
+
+    #[serde(rename(serialize = "code"))]
     code_snippet: String,
 }
 
@@ -108,7 +110,11 @@ impl Quiz {
     }
 
     /// Parse content in template
-    pub fn use_fmt_temp(&self, temp: &Option<String>) -> Result<String, String> {
+    pub fn use_fmt_temp(
+        &self,
+        temp: &Option<String>,
+        code_lang: &Option<String>,
+    ) -> Result<String, String> {
         match temp {
             Some(s) => {
                 // make template
@@ -122,7 +128,10 @@ impl Quiz {
                         source: self.source_link.clone(),
                         title: self.title.clone(),
                         content: self.quiz_description()?,
-                        code_snippet: String::new(), //:= need input language
+                        code_snippet: self
+                            .code_snippet(code_lang.as_ref().unwrap_or(&"rust".to_string()))
+                            .unwrap()
+                            .to_string(),
                     },
                 )
                 .map_err(|e| e.to_string())
@@ -163,7 +172,7 @@ mod tests {
     #[test]
     fn test_fmt_temp() {
         //let mut q = Quiz::new();
-        let s = "README {source}, {title}; {content}..{level}";
+        let s = "README {source}, {title}; {content}..{level}ll{code}";
 
         // make template
         let mut tt = TinyTemplate::new();
@@ -179,11 +188,14 @@ mod tests {
                     source: "linklink".to_string(),
                     title: "titititle".to_string(),
                     content: "main content".to_string(),
-                    code_snippet: String::new(),
+                    code_snippet: "codecode".to_string(),
                 },
             )
             .unwrap();
 
-        assert_eq!(result, "README linklink, titititle; main content..Easy");
+        assert_eq!(
+            result,
+            "README linklink, titititle; main content..Easyllcodecode"
+        );
     }
 }

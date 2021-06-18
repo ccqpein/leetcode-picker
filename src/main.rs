@@ -23,7 +23,13 @@ fn main() -> Result<(), String> {
             let qq = if commandline_args.if_interact() {
                 loop {
                     let qq = Quiz::get_randomly(commandline_args.level())?;
-                    println!("{}", qq.use_fmt_temp(commandline_args.template())?);
+                    println!(
+                        "{}",
+                        qq.use_fmt_temp(
+                            commandline_args.template(),
+                            commandline_args.if_show_code_snippet()
+                        )?
+                    );
 
                     // ask
                     let a = Question::new("Is this good? (yes/no/y/n)")
@@ -38,7 +44,13 @@ fn main() -> Result<(), String> {
                 }
             } else {
                 let qq = Quiz::get_randomly(commandline_args.level())?;
-                println!("{}", qq.use_fmt_temp(commandline_args.template())?);
+                println!(
+                    "{}",
+                    qq.use_fmt_temp(
+                        commandline_args.template(),
+                        commandline_args.if_show_code_snippet()
+                    )?
+                );
                 qq
             };
 
@@ -49,7 +61,13 @@ fn main() -> Result<(), String> {
             // try id first
             if let Some(ref id) = commandline_args.quiz_id() {
                 let qq = Quiz::get_by_id(*id)?;
-                println!("{}", qq.use_fmt_temp(commandline_args.template())?);
+                println!(
+                    "{}",
+                    qq.use_fmt_temp(
+                        commandline_args.template(),
+                        commandline_args.if_show_code_snippet()
+                    )?
+                );
                 // show code snippet
                 print_code_snippet(commandline_args.if_show_code_snippet(), &qq)?;
                 return Ok(());
@@ -58,7 +76,13 @@ fn main() -> Result<(), String> {
             // try name then
             if let Some(ref name) = commandline_args.name() {
                 let qq = Quiz::get_by_name(name)?;
-                println!("{}", qq.use_fmt_temp(commandline_args.template())?);
+                println!(
+                    "{}",
+                    qq.use_fmt_temp(
+                        commandline_args.template(),
+                        commandline_args.if_show_code_snippet()
+                    )?
+                );
                 // show code snippet
                 print_code_snippet(commandline_args.if_show_code_snippet(), &qq)?;
                 return Ok(());

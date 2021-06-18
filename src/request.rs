@@ -173,7 +173,7 @@ pub fn set_token(token_str: &Option<String>) {
     if token_str.is_some() {
         match CSRFTOKEN.try_lock() {
             Ok(ref mut t) => **t = token_str.clone(),
-            Err(e) => panic!(e.to_string()),
+            Err(e) => panic!("{}", e.to_string()),
         }
     }
 }
@@ -240,7 +240,7 @@ mod tests {
         set_token(&Some("aaa".to_string()));
         match CSRFTOKEN.try_lock() {
             Ok(ref mut t) => assert_eq!(**t, Some("aaa".to_string())),
-            Err(e) => panic!(e.to_string()),
+            Err(e) => panic!("{}", e.to_string()),
         }
     }
 }
