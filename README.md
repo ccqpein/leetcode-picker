@@ -61,4 +61,7 @@ all template fields:
 
   * [ ] how to login and get token in this app?
     * [x] where to store token string?
-  * [ ] emacs mode?
+  * [ ] emacs mode? (yes)
+    * [x] binding 
+    * [ ] format string
+    * [ ] create buffer

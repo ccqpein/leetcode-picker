@@ -50,6 +50,13 @@ impl FromStr for Level {
     }
 }
 
+#[cfg(feature = "emacs")]
+impl emacs::FromLisp<'_> for Level {
+    fn from_lisp(value: emacs::Value<'_>) -> emacs::Result<Self> {
+        Ok(Level::from_str(&String::from_lisp(value).unwrap()).unwrap())
+    }
+}
+
 impl Quiz {
     pub(super) fn from_resp(resp: Response, source_link: String) -> Result<Self, String> {
         let content = graphql_response_parse(resp)?;
