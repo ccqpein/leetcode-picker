@@ -11,7 +11,7 @@ use tinytemplate::TinyTemplate;
 
 const LC_P: &str = "https://leetcode.com/problems/";
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Quiz {
     title: String,
     level: Level,
