@@ -64,4 +64,5 @@ all template fields:
   * [ ] emacs mode? (yes)
     * [x] binding 
     * [ ] format string
-    * [ ] create buffer
+    * [x] create buffer
+    * [ ] cargo install lib
