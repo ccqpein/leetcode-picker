@@ -55,6 +55,14 @@ fn strong_tag(text: &str) -> String {
     String::from(STRONG_TAG.replace_all(text, "**$data**"))
 }
 
+fn em_tag(text: &str) -> String {
+    lazy_static! {
+        static ref EM_TAG: Regex = Regex::new(r"<em>(?P<data>.*?)</em>").unwrap();
+    }
+
+    String::from(EM_TAG.replace_all(text, "*$data*"))
+}
+
 fn special_sym_clean(text: &str) -> String {
     lazy_static! {
         static ref SPACE_TAG: Regex = Regex::new(r"(?P<data>\&nbsp;?)").unwrap();
@@ -86,6 +94,7 @@ pub fn clean_all_tags(content: &mut String) {
         ul_tag,
         li_tag,
         strong_tag,
+        em_tag,
         special_sym_clean,
     ] {
         *content = f(content);

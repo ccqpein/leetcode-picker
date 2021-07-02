@@ -10,6 +10,10 @@ fn work_flow_test() {
         }
     };
 
+    // test if case in disk as same as online version
+    let content = include_str!("./questions_description_test_case1");
+    assert_eq!(resp.quiz_pure_description().unwrap(), content);
+
     assert_eq!(resp.quiz_id().unwrap(), "1011");
     assert_eq!(
         resp.quiz_source(),

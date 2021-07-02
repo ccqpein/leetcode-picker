@@ -63,6 +63,6 @@ all template fields:
     * [x] where to store token string?
   * [ ] emacs mode? (yes)
     * [x] binding 
-    * [ ] format string
+    * [x] format string
     * [x] create buffer
     * [ ] cargo install lib
