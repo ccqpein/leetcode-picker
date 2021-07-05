@@ -18,6 +18,7 @@ fn main() -> Result<(), String> {
 
     // set token with command line token
     set_token(commandline_args.token());
+
     match commandline_args.if_random() {
         true => {
             let qq = if commandline_args.if_interact() {

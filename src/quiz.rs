@@ -119,14 +119,14 @@ impl Quiz {
     /// Parse content in template
     pub fn use_fmt_temp(
         &self,
-        temp: &Option<String>,
+        temp: Option<String>,
         code_lang: &Option<String>,
     ) -> Result<String, String> {
         match temp {
             Some(s) => {
                 // make template
                 let mut tt = TinyTemplate::new();
-                tt.add_template("quiz", s).map_err(|e| e.to_string())?;
+                tt.add_template("quiz", &s).map_err(|e| e.to_string())?;
 
                 tt.render(
                     "quiz",
@@ -178,7 +178,6 @@ mod tests {
 
     #[test]
     fn test_fmt_temp() {
-        //let mut q = Quiz::new();
         let s = "README {source}, {title}; {content}..{level}ll{code}";
 
         // make template
@@ -204,5 +203,32 @@ mod tests {
             result,
             "README linklink, titititle; main content..Easyllcodecode"
         );
+
+        // test \n
+        let s = "README {source}\n\n, {title}; {content}..{level}ll{code}";
+        tt.add_template("quiz", s)
+            .map_err(|e| e.to_string())
+            .unwrap();
+
+        let result = tt
+            .render(
+                "quiz",
+                &FmtTemplate {
+                    level: Level::Easy,
+                    source: "linklink".to_string(),
+                    title: "titititle".to_string(),
+                    content: "main content".to_string(),
+                    code_snippet: "codecode".to_string(),
+                },
+            )
+            .unwrap();
+
+        assert_eq!(
+            result,
+            "README linklink
+
+, titititle; main content..Easyllcodecode"
+        );
+        println!("{}", result);
     }
 }

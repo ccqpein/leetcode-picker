@@ -50,6 +50,10 @@ Unless you give `--id` or `--name`, you always need `-r` for randomly pick.
 
 `leetcode-picker --id 1 -c rust --temp-str 'source link: {source}, title: {title}'`
 
+**Custom description format with file**
+
+`leetcode-picker --id 1 -c rust --temp-file ./tests/README_temp`
+
 all template fields:
 
 - title

@@ -1,10 +1,10 @@
 use super::Level;
 use clap::Clap;
-use std::str::FromStr;
+use std::{fs::File, io::Read, str::FromStr};
 
 /// command line arguments
 #[derive(Default, Clap, Debug)]
-#[clap(version = "0.1.4")]
+#[clap(version = "0.1.5")]
 pub struct Args {
     /// quiz name
     #[clap(long = "name")]
@@ -33,6 +33,10 @@ pub struct Args {
     /// template string
     #[clap(long = "temp-str")]
     temp_str: Option<String>,
+
+    /// template file
+    #[clap(long = "temp-file")]
+    temp_file: Option<String>,
 
     /// token string
     #[clap(long = "token")]
@@ -73,8 +77,21 @@ impl Args {
         &self.code_snippet
     }
 
-    pub fn template(&self) -> &Option<String> {
-        &self.temp_str
+    /// give template string, if has template file instead of string
+    /// use template file prior.
+    pub fn template(&self) -> Option<String> {
+        if let Some(filepath) = &self.temp_file {
+            let mut f = match File::open(filepath) {
+                Ok(f) => f,
+                Err(e) => panic!("read temp file has issue: {}", e),
+            };
+            let mut result = String::new();
+            f.read_to_string(&mut result).unwrap();
+            // update temp_str with file
+            Some(result)
+        } else {
+            self.temp_str.clone()
+        }
     }
 
     pub fn token(&self) -> &Option<String> {
