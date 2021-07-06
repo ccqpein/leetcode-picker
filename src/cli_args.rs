@@ -4,7 +4,7 @@ use std::{fs::File, io::Read, str::FromStr};
 
 /// command line arguments
 #[derive(Default, Clap, Debug)]
-#[clap(version = "0.1.5")]
+#[clap(version = "0.1.6")]
 pub struct Args {
     /// quiz name
     #[clap(long = "name")]
