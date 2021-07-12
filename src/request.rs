@@ -96,7 +96,7 @@ pub(super) fn get_quiz_by_id(id: u64) -> Result<Quiz, String> {
         .ok_or("Cannot found this id".to_string())?
         .as_str()
         .ok_or("Cannot parse to string".to_string())?;
-
+    //dbg!("quiz name: {}", quiz_name);
     Quiz::get_by_name(quiz_name)
 }
 

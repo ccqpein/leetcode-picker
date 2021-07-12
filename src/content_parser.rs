@@ -85,6 +85,7 @@ pub(super) fn description_markdown<'a>(ir: impl Iterator<Item = NodeRef<'a, Node
         _ => None,
     })
     .map(|mut chunk| {
+        //dbg!(&chunk);
         clean_all_tags(&mut chunk);
         chunk
     })

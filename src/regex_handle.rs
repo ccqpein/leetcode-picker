@@ -146,6 +146,7 @@ mod tests {
         assert_eq!(special_sym_clean("&nbsp;&lt;="), "<=");
         assert_eq!(special_sym_clean("\n\n"), "\n\n");
         assert_eq!(special_sym_clean("\\n\\n"), "\n\n");
+        assert_eq!(special_sym_clean("&lt;="), "<=");
     }
 
     #[test]

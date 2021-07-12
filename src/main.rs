@@ -45,6 +45,7 @@ fn main() -> Result<(), String> {
                 }
             } else {
                 let qq = Quiz::get_randomly(commandline_args.level())?;
+                //dbg!(qq.quiz_description()?);
                 println!(
                     "{}",
                     qq.use_fmt_temp(
@@ -62,6 +63,8 @@ fn main() -> Result<(), String> {
             // try id first
             if let Some(ref id) = commandline_args.quiz_id() {
                 let qq = Quiz::get_by_id(*id)?;
+                //dbg!(qq.quiz_pure_description()?);
+                //dbg!(qq.quiz_description()?);
                 println!(
                     "{}",
                     qq.use_fmt_temp(

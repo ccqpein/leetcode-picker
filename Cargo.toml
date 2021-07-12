@@ -1,6 +1,6 @@
 [package]
 name = "leetcode-picker"
-version = "0.1.6"
+version = "0.1.7"
 authors = ["ccQpein"]
 edition = "2018"
 description = "Command line app for picking leetcode quiz"

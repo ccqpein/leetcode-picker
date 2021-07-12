@@ -90,13 +90,19 @@ impl Quiz {
         &self.source_link
     }
 
-    pub fn quiz_pure_description(&self) -> Result<&str, String> {
-        find_question_content(&self.content)
+    pub fn quiz_pure_description(&self) -> Result<String, String> {
+        let s = find_question_content(&self.content)?;
+        // some quizzes haven't start with <p>, have to add by myself
+        if s.starts_with("<p>") {
+            Ok(s.to_string())
+        } else {
+            Ok("<p>".to_string() + s + "</p>")
+        }
     }
 
     /// Get markdown description of quiz
     pub fn quiz_description(&self) -> Result<String, String> {
-        let fragment = Html::parse_fragment(self.quiz_pure_description()?);
+        let fragment = Html::parse_fragment(&self.quiz_pure_description()?);
         Ok(description_markdown(description_in_graphql(&fragment)).join(""))
     }
 
