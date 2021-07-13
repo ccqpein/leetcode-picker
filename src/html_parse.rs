@@ -11,7 +11,7 @@ pub fn parse_response_body(rep: Response) {
                 .iter()
                 .for_each(|s| println!("{}", s));
         }
-        Err(_) => {} //:= todo
+        Err(_) => unreachable!(),
     }
 }
 

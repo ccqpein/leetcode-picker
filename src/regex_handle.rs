@@ -1,3 +1,4 @@
+//! This mod including all regex
 use lazy_static::*;
 use regex::Regex;
 
@@ -92,6 +93,7 @@ fn special_sym_clean(text: &str) -> String {
     )
 }
 
+/// clean all tags
 pub fn clean_all_tags(content: &mut String) {
     for f in [
         pre_tag,

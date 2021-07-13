@@ -56,6 +56,7 @@ pub(super) fn find_question_title_from_graphql_req(
     }
 }
 
+/// Get question content from graphql response
 pub(super) fn find_question_content(obj: &serde_json::Value) -> Result<&str, String> {
     match obj.get("data") {
         Some(d) => match d.get("question") {
@@ -69,10 +70,12 @@ pub(super) fn find_question_content(obj: &serde_json::Value) -> Result<&str, Str
     }
 }
 
+/// Give back html element of quiz content
 pub(super) fn description_in_graphql(h: &Html) -> impl Iterator<Item = NodeRef<'_, Node>> {
     h.root_element().children()
 }
 
+/// Parse html quiz content to markdown
 pub(super) fn description_markdown<'a>(ir: impl Iterator<Item = NodeRef<'a, Node>>) -> Vec<String> {
     ir.filter_map(|n| match n.value() {
         Node::Text(s) => Some(s.to_string()),

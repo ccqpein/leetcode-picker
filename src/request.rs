@@ -36,7 +36,7 @@ lazy_static! {
 /// return response
 /// url will return bunch of js script, need name in url to make json request
 pub(super) fn get_quiz_by_url(url: &str) -> Result<Quiz, String> {
-    let token = get_csrftoken("./vault/csrftoken")?; //:= need change to some other path
+    let token = get_csrftoken("./vault/csrftoken")?;
     let cli = make_client(&token, LC_GRAPHQL_ENDPOINT).map_err(|e| e.to_string())?;
     let req = request_builder(
         &cli,
@@ -53,7 +53,7 @@ pub(super) fn get_quiz_by_url(url: &str) -> Result<Quiz, String> {
 }
 
 pub(super) fn get_all_quiz() -> Result<serde_json::Value, String> {
-    let token = get_csrftoken("./vault/csrftoken")?; //:= need change to some other path
+    let token = get_csrftoken("./vault/csrftoken")?;
     let cli = make_client(&token, LC_ALL_QUIZ_API).map_err(|e| e.to_string())?;
     let req = request_builder(
         &cli,
@@ -101,7 +101,7 @@ pub(super) fn get_quiz_by_id(id: u64) -> Result<Quiz, String> {
 }
 
 pub(super) fn get_random_quiz(l: Option<Level>) -> Result<Quiz, String> {
-    let token = get_csrftoken("./vault/csrftoken")?; //:= need change to some other path
+    let token = get_csrftoken("./vault/csrftoken")?;
     let cli = make_client(&token, LC_RANDOM_QUIZ_API).map_err(|e| e.to_string())?;
 
     loop {

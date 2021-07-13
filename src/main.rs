@@ -2,6 +2,8 @@ use clap::Clap;
 use leetcode_picker::*;
 use question::{Answer, Question};
 
+use log::*;
+
 fn print_code_snippet(arg: &Option<String>, qq: &Quiz) -> Result<(), String> {
     if let Some(ll) = arg {
         match qq.code_snippet(ll) {
@@ -13,6 +15,8 @@ fn print_code_snippet(arg: &Option<String>, qq: &Quiz) -> Result<(), String> {
 }
 
 fn main() -> Result<(), String> {
+    env_logger::init();
+
     let commandline_args = cli_args::Args::parse();
     //dbg!(&commandline_args);
 
@@ -24,6 +28,7 @@ fn main() -> Result<(), String> {
             let qq = if commandline_args.if_interact() {
                 loop {
                     let qq = Quiz::get_randomly(commandline_args.level())?;
+                    info!("this quiz's description: {}", qq.quiz_description()?);
                     println!(
                         "{}",
                         qq.use_fmt_temp(
@@ -45,7 +50,7 @@ fn main() -> Result<(), String> {
                 }
             } else {
                 let qq = Quiz::get_randomly(commandline_args.level())?;
-                //dbg!(qq.quiz_description()?);
+                info!("this quiz's description: {}", qq.quiz_description()?);
                 println!(
                     "{}",
                     qq.use_fmt_temp(
@@ -63,8 +68,7 @@ fn main() -> Result<(), String> {
             // try id first
             if let Some(ref id) = commandline_args.quiz_id() {
                 let qq = Quiz::get_by_id(*id)?;
-                //dbg!(qq.quiz_pure_description()?);
-                //dbg!(qq.quiz_description()?);
+                info!("this quiz's description: {}", qq.quiz_description()?);
                 println!(
                     "{}",
                     qq.use_fmt_temp(
@@ -80,6 +84,7 @@ fn main() -> Result<(), String> {
             // try name then
             if let Some(ref name) = commandline_args.name() {
                 let qq = Quiz::get_by_name(name)?;
+                info!("this quiz's description: {}", qq.quiz_description()?);
                 println!(
                     "{}",
                     qq.use_fmt_temp(

@@ -32,5 +32,8 @@ tinytemplate = "1"
 # emacs support
 emacs = {version = "0.15", optional = true}
 
+log = "0.4"
+env_logger = "0.8"
+
 #[dev-dependencies]
 #emacs-rs-module = { version = "0.13" }
