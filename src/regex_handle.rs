@@ -71,6 +71,7 @@ fn special_sym_clean(text: &str) -> String {
         static ref NEWL_TAG: Regex = Regex::new(r"(?P<data>(\\+n)+?)").unwrap();
         static ref TAB_TAG: Regex = Regex::new(r"(?P<data>(\\+t)+?)").unwrap();
         static ref APOSTROPHE_TAG: Regex = Regex::new(r"(?P<data>\&#39;?)").unwrap();
+        static ref QUOTE_TAG: Regex = Regex::new(r"(?P<data>\&quot;?)").unwrap();
     }
 
     String::from(
@@ -80,7 +81,15 @@ fn special_sym_clean(text: &str) -> String {
                     LESS_TAG
                         .replace_all(
                             SPACE_TAG
-                                .replace_all(APOSTROPHE_TAG.replace_all(text, "'").as_ref(), "")
+                                .replace_all(
+                                    APOSTROPHE_TAG
+                                        .replace_all(
+                                            QUOTE_TAG.replace_all(text, "\"").as_ref(),
+                                            "'",
+                                        )
+                                        .as_ref(),
+                                    "",
+                                )
                                 .as_ref(),
                             "<",
                         )
