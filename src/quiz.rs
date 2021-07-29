@@ -9,6 +9,8 @@ use scraper::Html;
 use serde::Serialize;
 use tinytemplate::TinyTemplate;
 
+use log::*;
+
 const LC_P: &str = "https://leetcode.com/problems/";
 
 #[derive(Debug, Clone)]
@@ -133,7 +135,10 @@ impl Quiz {
                 // make template
                 let mut tt = TinyTemplate::new();
                 tt.add_template("quiz", &s).map_err(|e| e.to_string())?;
-
+                debug!(
+                    "this is the quiz description in template: {}",
+                    self.quiz_description()?
+                );
                 tt.render(
                     "quiz",
                     &FmtTemplate {

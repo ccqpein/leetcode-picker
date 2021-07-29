@@ -1,4 +1,4 @@
-use super::Level;
+use super::quiz::Level;
 use clap::Clap;
 use std::{fs::File, io::Read, str::FromStr};
 
