@@ -1,6 +1,6 @@
 [package]
 name = "leetcode-picker"
-version = "0.1.7"
+version = "0.1.8"
 authors = ["ccQpein"]
 edition = "2018"
 description = "Command line app for picking leetcode quiz"
@@ -17,7 +17,7 @@ crate-type = ["cdylib", "rlib"]
 emacs-support = ["emacs"]
 
 [dependencies]
-reqwest = {version = "0.11",features = ["blocking", "json", "cookies"]}
+reqwest = { version = "0.11", features = ["blocking", "json", "cookies"] }
 scraper = "0.12.0"
 ego-tree = "^0.6"
 regex = "1"
@@ -30,7 +30,7 @@ question = "0.2.2"
 tinytemplate = "1"
 
 # emacs support
-emacs = {version = "0.15", optional = true}
+emacs = { version = "0.15", optional = true }
 
 log = "0.4"
 env_logger = "0.8"

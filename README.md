@@ -1,5 +1,7 @@
 # README #
 
+**CAUTION: this tools isn't mainmtain anymore**
+
 This is a tiny app for picking the quiz from [leetcode](https://leetcode.com), print out quiz description and code snippet.
 
 ## Usage ##
